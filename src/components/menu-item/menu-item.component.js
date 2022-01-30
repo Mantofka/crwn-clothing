@@ -1,30 +1,29 @@
 import React from "react";
 import { withRouter } from "../withRouter";
 
-import "./menu-item.styles.scss";
+import {
+  MenuItemContainer,
+  BackgroundImage,
+  ContentContainer,
+  Title,
+  Subtitle,
+} from "./menu-item.styles";
 
-const MenuItem = ({
-  title,
-  imageUrl,
-  size,
-  linkUrl,
-  navigate,
-  location,
-}) => {
+const MenuItem = ({ title, imageUrl, size, linkUrl, navigate, location }) => {
   return (
-    <div
-      className={`${size} menu-item`}
+    <MenuItemContainer
+      className={size}
       onClick={() => navigate(`${location.pathname}${linkUrl}`)}
     >
-      <div
+      <BackgroundImage
+        imageUrl={imageUrl}
         className='background-image'
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      ></div>
-      <div className='content'>
-        <h1 className='title'>{title}</h1>
-        <span className='subtitle'>SHOP NOW</span>
-      </div>
-    </div>
+      ></BackgroundImage>
+      <ContentContainer className='content'>
+        <Title>{title}</Title>
+        <Subtitle>SHOP NOW</Subtitle>
+      </ContentContainer>
+    </MenuItemContainer>
   );
 };
 
