@@ -1,28 +1,18 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { withRouter } from "../../components/withRouter";
-import { createStructuredSelector } from "reselect";
-import { fetchCollectionsStartAsync } from "../../redux/shop/shop.actions";
+import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 import { connect } from "react-redux";
-import {
-  selectIsCollectionFetching,
-  selectIsCollectionsLoaded,
-} from "../../redux/shop/shop.selectors";
 
-import WithSpinner from "../../components/with-spinner/with-spinner.component";
-
-import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
-import CollectionPage from "../collection/collection.component";
-
-const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
+import CollectionPageContainer from "../collection/collection.container";
 
 class ShopPage extends React.Component {
   unsubscribeFromSnapshot = null;
 
   componentDidMount() {
-    const { fetchCollectionsStartAsync } = this.props;
-    fetchCollectionsStartAsync();
+    const { fetchCollectionsStart } = this.props;
+    fetchCollectionsStart();
     /*
     this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
       async (snapshot) => {
@@ -35,19 +25,11 @@ class ShopPage extends React.Component {
   }
 
   render() {
-    const { isLoaded } = this.props;
     return (
       <div className='shop-page'>
         <Routes>
-          <Route
-            exact
-            path={``}
-            element={<CollectionsOverviewWithSpinner isLoading={!isLoaded} />}
-          />
-          <Route
-            path={`/:categoryId`}
-            element={<CollectionPageWithSpinner isLoading={!isLoaded} />}
-          />
+          <Route exact path={``} element={<CollectionsOverviewContainer />} />
+          <Route path={`/:categoryId`} element={<CollectionPageContainer />} />
         </Routes>
       </div>
     );
@@ -55,14 +37,7 @@ class ShopPage extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 
-const mapStateToProps = createStructuredSelector({
-  isFetching: selectIsCollectionFetching,
-  isLoaded: selectIsCollectionsLoaded,
-});
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ShopPage)
-);
+export default withRouter(connect(null, mapDispatchToProps)(ShopPage));
