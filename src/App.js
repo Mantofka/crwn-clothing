@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
@@ -14,35 +14,12 @@ import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.com
 import CheckoutPage from "./pages/checkout/checkout.component";
 import { checkUserSession } from "./redux/user/user.actions";
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
+const App = ({checkUserSession, currentUser}) => {
 
-
-  componentDidMount() {
-    const {checkUserSession} = this.props;
+  useEffect(() => {
     checkUserSession();
-    /*
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+  }, [checkUserSession]);
 
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
-        });
-      }
-      setCurrentUser(userAuth);
-    });
-    */
-  }
-
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
-
-  render() {
     return (
       <div>
         <Header />
@@ -54,13 +31,12 @@ class App extends React.Component {
             exact
             path='/signin'
             element={
-              this.props.currentUser ? <Navigate to='/' /> : <SignInAndSignUp />
+              currentUser ? <Navigate to='/' /> : <SignInAndSignUp />
             }
           />
         </Routes>
       </div>
     );
-  }
 }
 
 const mapStateToProps = createStructuredSelector({
