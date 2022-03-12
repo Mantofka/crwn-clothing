@@ -19,8 +19,8 @@ const SignIn = () => {
 
   const googleSignInStartHandler = () => {
     dispatch(googleSignInStart());
-  }
-  
+  };
+
   const { email, password } = userCredentials;
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ const SignIn = () => {
           <CustomButton
             type='button'
             onClick={() => googleSignInStartHandler()}
-            isGoogleSignIn
+            googleSignIn
           >
             Sign With Google
           </CustomButton>

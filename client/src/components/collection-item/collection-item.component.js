@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { AnimatePresence } from "framer-motion";
 
-import { connect } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { addItem } from "../../redux/cart/cart.actions";
@@ -17,11 +17,12 @@ import {
 
 import { CollectionItemVariants } from "./collection-item.variants";
 
-const CollectionItem = ({ item, title = "", addItem }) => {
+const CollectionItem = ({ item, title = "" }) => {
   const { name, price, imageUrl } = item;
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   return (
     <CollectionItemContainer
@@ -59,7 +60,7 @@ const CollectionItem = ({ item, title = "", addItem }) => {
               opacity: 0,
               transition: { type: "spring", stiffness: 700, damping: 70 },
             }}
-            onClick={() => addItem(item)}
+            onClick={() => dispatch(addItem(item))}
           >
             Add to cart
           </AddButton>
@@ -69,8 +70,5 @@ const CollectionItem = ({ item, title = "", addItem }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addItem: (item) => dispatch(addItem(item)),
-});
 
-export default connect(null, mapDispatchToProps)(CollectionItem);
+export default CollectionItem;
