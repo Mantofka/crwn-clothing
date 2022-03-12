@@ -1,8 +1,6 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 
 import { useNavigate } from "react-router-dom";
-import CustomButton from "../custom-bottom/custom-button.component";
-import CartItem from "../cart-item/cart-item.component";
 import { useSelector, useDispatch } from "react-redux";
 
 import { selectCartItems } from "../../redux/cart/cart.selectors";
@@ -13,6 +11,10 @@ import {
   CartItemsContainer,
   EmptyMessage,
 } from "./cart-dropdown.styles";
+import Spinner from "../spinner/spinner.component";
+
+const CustomButton = lazy(() => import("../custom-bottom/custom-button.component"));
+const CartItem = lazy(() => import("../cart-item/cart-item.component"));
 
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
@@ -21,6 +23,7 @@ const CartDropdown = () => {
 
   return (
     <CartDropdownContainer>
+      <Suspense fallback={<Spinner />}>
       <CartItemsContainer>
         {cartItems.length ? (
           cartItems.map((cartItem) => (
@@ -38,6 +41,7 @@ const CartDropdown = () => {
       >
         GO TO CHECKOUT
       </CustomButton>
+      </Suspense>
     </CartDropdownContainer>
   );
 };

@@ -1,18 +1,21 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCollectionsForPreview } from "../../redux/shop/shop.selectors";
-import CollectionPreview from "../preview-collection/collection-preview.component";
+import Spinner from "../spinner/spinner.component";
 
 import { CollectionsOverviewContainer } from "./collections-overview.styles";
 
-const CollectionsOverview = ({ collections }) => {
+const CollectionPreview = lazy(() => import("../preview-collection/collection-preview.component"));
 
+const CollectionsOverview = ({ collections }) => {
   return (
     <CollectionsOverviewContainer className='collections-overview'>
+      <Suspense fallback={<Spinner />}>
       {collections.map(({ id, ...restProps }) => (
         <CollectionPreview key={id} {...restProps} />
       ))}
+      </Suspense>
     </CollectionsOverviewContainer>
   );
 };
