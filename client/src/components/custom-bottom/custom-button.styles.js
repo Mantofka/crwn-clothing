@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { motion } from "framer-motion";
 
 const buttonStyles = css`
   background-color: black;
@@ -36,7 +37,7 @@ const getButtonStyles = (props) => {
   return props.inverted ? invertedButtonStyles : buttonStyles;
 };
 
-export const CustomButtonContainer = styled.button`
+export const CustomButtonContainer = styled(motion.button)`
   min-width: 165px;
   width: auto;
   height: 50px;
@@ -50,5 +51,13 @@ export const CustomButtonContainer = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
+  align-items: center;
   ${getButtonStyles}
+  @media screen and (max-width: 800px) {
+    height: 60px;
+    font-size: 18px;
+    line-height: 30px;
+    width: 100%;
+    padding: 0 25px;
+  }
 `;

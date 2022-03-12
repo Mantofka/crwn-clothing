@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import CustomButton from "../custom-bottom/custom-button.component";
+import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
+import { motion } from "framer-motion";
 
-export const CollectionItemContainer = styled.div`
+export const CollectionItemContainer = styled(motion.div)`
+  cursor: pointer;
   width: 22vw;
   display: flex;
   flex-direction: column;
@@ -14,8 +17,25 @@ export const CollectionItemContainer = styled.div`
     }
     button {
       opacity: 0.85;
-      display: flex;
     }
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+
+    &:hover {
+      .image {
+        opacity: unset;
+      }
+      button {
+        opacity: unset;
+      }
+    }
+  }
+  @media screen and (max-width: 440px) {
+    width: 45vw;
+    height: 250px;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -32,8 +52,26 @@ export const AddButton = styled(CustomButton)`
   width: 80%;
   opacity: 0.7;
   position: absolute;
-  top: 255px;
-  display: none;
+  top: 75%;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  width: 70%;
+  @media screen and (max-width: 800px) {
+    opacity: 0.9;
+    min-width: unset;
+    padding: 0.2 0.4rem;
+    top: 80%;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 440px) {
+    display: none;
+  }
+`;
+
+export const IconShopping = styled(ShoppingIcon)`
+  width: 20px;
+  height: 20px;
 `;
 
 export const CollectionFooterContainer = styled.div`

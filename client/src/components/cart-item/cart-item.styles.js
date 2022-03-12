@@ -9,6 +9,9 @@ export const CartItemContainer = styled.div`
 
 export const Image = styled.img`
   width: 30%;
+  @media screen and (max-width: 800px) {
+    width: 25%;
+  }
 `;
 
 export const ItemDetailsContainer = styled.div`
@@ -22,4 +25,7 @@ export const ItemDetailsContainer = styled.div`
 
 export const Text = styled.span`
   font-size: 16px;
+  @media screen and (max-width: 800px) {
+    font-size: 20px;
+  }
 `;

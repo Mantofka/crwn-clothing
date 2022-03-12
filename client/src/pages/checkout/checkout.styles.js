@@ -7,9 +7,11 @@ export const CheckoutPageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 50px auto 0;
-
   button {
     margin-left: auto;
+  }
+  @media screen and (max-width: 800px) {
+    width: 90%;
   }
 `;
 
@@ -28,6 +30,12 @@ export const HeaderBlock = styled.div`
   &:last-child {
     width: 8%;
   }
+  @media screen and (max-width: 800px) {
+    width: 21%;
+    &:last-child {
+      width: 14%;
+    }
+  }
 `;
 
 export const Total = styled.div`
@@ -41,4 +49,9 @@ export const TestWarningContainer = styled.div`
   margin-top: 40px;
   font-size: 24px;
   color: red;
+`;
+
+export const Line = styled.div`
+  border-bottom: 1px solid darkgrey;
+  width: 100%;
 `;

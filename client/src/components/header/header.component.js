@@ -29,13 +29,15 @@ const Header = () => {
   return (
     <HeaderContainer>
       <LogoContainer to='/'>
-        <Logo className='logo' />
+        <Logo />
       </LogoContainer>
       <OptionsContainer>
         <OptionLink to='/shop'>SHOP</OptionLink>
         <OptionLink to='/'>CONTACT</OptionLink>
         {currentUser ? (
-          <OptionDiv onClick={() => dispatch(signOutStart())}>SIGN OUT</OptionDiv>
+          <OptionDiv onClick={() => dispatch(signOutStart())}>
+            SIGN OUT
+          </OptionDiv>
         ) : (
           <OptionLink to='/signin'>SIGN IN</OptionLink>
         )}

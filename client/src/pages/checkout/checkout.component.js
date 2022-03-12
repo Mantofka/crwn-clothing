@@ -1,4 +1,5 @@
 import React from "react";
+import { AnimatePresence } from "framer-motion";
 
 import { useSelector } from "react-redux";
 import {
@@ -15,12 +16,12 @@ import {
   HeaderBlock,
   Total,
   TestWarningContainer,
+  Line,
 } from "./checkout.styles";
 
 const CheckoutPage = () => {
   const cartItems = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
-
 
   return (
     <CheckoutPageContainer>
@@ -41,10 +42,12 @@ const CheckoutPage = () => {
           <span>Remove</span>
         </HeaderBlock>
       </CheckoutHeaderContainer>
-      {cartItems.map((cartItem, id) => (
-        <CheckoutItem key={id} cartItem={cartItem} />
-      ))}
-
+      <AnimatePresence>
+        {cartItems.map((cartItem, id) => (
+          <CheckoutItem key={id} cartItem={cartItem} />
+        ))}
+      </AnimatePresence>
+      <Line />
       <Total>
         <span>TOTAL: {total} $</span>
       </Total>

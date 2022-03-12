@@ -4,7 +4,11 @@ import { CustomButtonContainer } from "./custom-button.styles";
 
 const CustomButton = ({ children, ...restProps }) => {
   return (
-    <CustomButtonContainer {...restProps}>{children}</CustomButtonContainer>
+    <CustomButtonContainer
+      {...restProps}
+    >
+      {children}
+    </CustomButtonContainer>
   );
 };
 

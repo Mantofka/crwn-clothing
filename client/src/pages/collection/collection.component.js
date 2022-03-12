@@ -14,16 +14,16 @@ import {
 const CollectionPage = () => {
   const { categoryId } = useParams();
   const collection = useSelector(selectCollection(categoryId));
-
+  
   const { title, items } = collection;
 
   return (
     <CollectionPageContainer>
       <Title>{title}</Title>
       <ItemsContainer>
-        {items.map((item) => (
-          <CollectionItem key={item.id} item={item} />
-        ))}
+          {items.map((item) => (
+            <CollectionItem key={item.id} item={item} />
+          ))}
       </ItemsContainer>
     </CollectionPageContainer>
   );
